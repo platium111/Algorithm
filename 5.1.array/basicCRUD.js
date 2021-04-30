@@ -1,0 +1,42 @@
+// 1.create (add)
+// 1.1. add in first
+// * C1 | using immutation then concat
+const addFirstArr = [0, 1, 2, 3, 4];
+const newValue = -1;
+const newAddFirstArr = addFirstArr
+  .map((_, index) => {
+    return addFirstArr[index + 1];
+  })
+  .filter(Boolean);
+const resultNewAddFirstArr = [newValue].concat(newAddFirstArr);
+console.log("resultNewAddFirstArr", resultNewAddFirstArr);
+
+// * C2 | we can't go from 0 -> length because it will erase value unless using new Array
+let addFirstArr1 = [0, 1, 2, 3, 4];
+for (let i = addFirstArr1.length; i >= 0; i--) {
+  addFirstArr1[i] = addFirstArr1[i - 1];
+  if (i === 0) addFirstArr1[0] = newValue;
+}
+console.log("addFirstArr1", addFirstArr1);
+
+// * C3 | using new array -> new array with 0 is new Value -> then newArr[i] = arr[i-1]
+let addFirstArr2 = [0, 1, 2, 3, 4];
+let newAddFirstArr2 = [];
+for (let i = 0; i <= addFirstArr2.length; i++) {
+  if (i === 0) newAddFirstArr2[0] = -1;
+  else newAddFirstArr2[i] = addFirstArr2[i - 1];
+}
+console.log("newAddFirstArr2", newAddFirstArr2);
+
+//1.2. add in last -> using push()
+
+// 2.remove
+// 2.1 remove in first
+let removeInFirst = [0, 1, 2, 3, 4];
+for (let i = 0; i < removeInFirst.length; i++) {
+  removeInFirst[i] = removeInFirst[i + 1];
+}
+console.log("removeInFirst", removeInFirst);
+// 3.update
+
+// 4.delete
