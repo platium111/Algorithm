@@ -29,14 +29,21 @@ for (let i = 0; i <= addFirstArr2.length; i++) {
 console.log("newAddFirstArr2", newAddFirstArr2);
 
 //1.2. add in last -> using push()
-
+// *********************************
 // 2.remove
-// 2.1 remove in first
+// 2.1 remove in first -> using map() OR shift()
 let removeInFirst = [0, 1, 2, 3, 4];
 for (let i = 0; i < removeInFirst.length; i++) {
+  if (i === removeInFirst.length) break;
   removeInFirst[i] = removeInFirst[i + 1];
 }
 console.log("removeInFirst", removeInFirst);
-// 3.update
 
-// 4.delete
+// * using shift()
+let removeInFirst1 = [0, 1, 2, 3, 4];
+removeInFirst1.shift(0);
+console.log("removeInFirst1", removeInFirst1);
+// 2.2. remove in last -> pop()
+
+// *********************************
+// 3.update -> arr[i] = new value
