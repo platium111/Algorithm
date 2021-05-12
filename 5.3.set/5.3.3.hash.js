@@ -24,7 +24,15 @@
  *        using linkedlist and add more into key if it's the same hashCode value
  *        problems -> more memory
  *    -> Solution 2: Linear probing
- *        add directly in the hashtable by probing, if the position (hashCode value) is occupied, using key = position + 1
+ *        add directly in the hashtable by probing, if the position (hashCode value) is occupied, index = position + 1
+ *           index    key-value   hash
+ *            4           john      4
+ *            5           clark     5
+ *            6           kan       5 (here is empty before so we add here)
+ *        problems | delete -> if we remove only element, then will have empty spot in the hash table. There are empty and still have hash-with-value  -> bug
+ *        solutions
+ *          (1) soft delete | have deleted value in value, then find next spot until found it
+ *          (2) backward position | delete whole element, move the next same hash value to this postion by backward, do the same until get the last one, and backward the forward (not same hash value) 1 time
  *    -> Solution 3: double hashing
  */
 
@@ -99,6 +107,7 @@ export function defaultToString(item) {
 }
 
 // ----------------------------------------
+// using linkedlist
 class HashTableSeparateChaining {
   constructor(toStrFn = defaultToString) {
     this.toStrFn = toStrFn;
@@ -147,6 +156,31 @@ class HashTableSeparateChaining {
         }
         current = current.next;
       }
+    }
+    return false;
+  }
+}
+
+// backward position
+class HashBackwardTable {
+  constructor(toStrFn = defaultToString) {
+    this.toStrFn = toStrFn;
+    this.table = {};
+  }
+
+  put(key, value) {
+    if (key != null && value != null) {
+      const position = this.hashCode(key);
+      if (this.table[position] == null) {
+        this.table[position] = new ValuePair(key, value);
+      } else {
+        let index = position + 1;
+        while (this.table[index] != null) {
+          index++;
+        }
+        this.table[index] = new ValuePair(key, value);
+      }
+      return true;
     }
     return false;
   }
