@@ -56,6 +56,16 @@ class HashTable {
     return hash % 39; // reduce big number
   }
 
+  // better hash code
+  djb2HashCode(key) {
+    const tableKey = this.toStrFn(key);
+    let hash = 5381; // prime number
+    for (let i = 0; i < tableKey.length; i++) {
+      hash = hash * 33 + tableKey.charCodeAt(i); // 33 is just random magic number
+    }
+    return hash % 1013; // prime number
+  }
+
   hashCode(key) {
     return this.loseloseHashCode(key);
   }
