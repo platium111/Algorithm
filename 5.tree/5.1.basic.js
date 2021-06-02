@@ -71,11 +71,52 @@ class BinarySearchTree {
       insertNode(this.root, key);
     }
   }
+
+  /**
+   * go from left, when we use node.left -> it runs function again in recursive way -> reach to the leaf -> go visit parent -> then go right
+   *  shorcut = left -> parent -> right
+   */
+  inorderTraverse() {
+    const inOrderTraverseNode = (node) => {
+      if (node !== null) {
+        inOrderTraverseNode(node.left);
+        console.log("node", node);
+        inOrderTraverseNode(node.right);
+      }
+    };
+    inOrderTraverseNode(this.root);
+  }
+
+  // parent -> left -> right
+  preorderTraverse() {
+    const inOrderTraverseNode = (node) => {
+      if (node !== null) {
+        console.log("node", node);
+        inOrderTraverseNode(node.left);
+        inOrderTraverseNode(node.right);
+      }
+    };
+    inOrderTraverseNode(this.root);
+  }
+
+  // left -> right -> parent
+  postorderTraverse() {
+    const inOrderTraverseNode = (node) => {
+      if (node !== null) {
+        inOrderTraverseNode(node.left);
+        inOrderTraverseNode(node.right);
+        console.log("node", node);
+      }
+    };
+    inOrderTraverseNode(this.root);
+  }
 }
 
 const myTree = new BinarySearchTree();
 myTree.insert(12);
 myTree.insert(14);
 myTree.insert(11);
+myTree.insert(16);
 myTree.insert(9);
-console.log(myTree);
+// console.log(myTree);
+myTree.inorderTraverse();
