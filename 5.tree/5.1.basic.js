@@ -110,6 +110,41 @@ class BinarySearchTree {
     };
     inOrderTraverseNode(this.root);
   }
+
+  // search min max values
+  max() {
+    let current = this.root;
+    while (current !== null && current.left !== null) {
+      current = current.left;
+    }
+    return current;
+  }
+  min() {
+    let current = this.root;
+    while (current !== null && current.right !== null) {
+      current = current.right;
+    }
+    return current;
+  }
+
+  search(key) {
+    const searchKey = (node, key) => {
+      if (node === null) {
+        console.log("not found");
+        return false;
+      }
+      if (node.key < key) {
+        return searchKey(node.left, key);
+      } else if (node.key > key) {
+        return searchKey(node.right, key);
+      } else {
+        console.log("Found ", key);
+        return true;
+      }
+    };
+
+    searchKey(this.root, key);
+  }
 }
 
 const myTree = new BinarySearchTree();
@@ -120,3 +155,6 @@ myTree.insert(16);
 myTree.insert(9);
 // console.log(myTree);
 myTree.inorderTraverse();
+console.log(myTree.min());
+
+myTree.search(9);
