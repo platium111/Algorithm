@@ -1,5 +1,6 @@
-// 1.create (add)
-// 1.1. add in first
+// 1.Replacing first
+// 1.1. replacing in first
+//  + concat return new array -> immutable. We can use [..., newElement] with the same function
 // * C1 | using immutation then concat
 const addFirstArr = [0, 1, 2, 3, 4];
 const newValue = -1;
@@ -28,10 +29,15 @@ for (let i = 0; i <= addFirstArr2.length; i++) {
 }
 console.log("newAddFirstArr2", newAddFirstArr2);
 
-//1.2. add in last -> using push()
+// * C4: spreading
+const [removed, ...remainingExp1] = addFirstArr;
+const newExp1 = [newValue, ...remainingExp1];
+console.log("new values exp1 ", newExp1);
+
+//1.2. add in last -> using push() OR concat OR spreading
 // *********************************
 // 2.remove
-// 2.1 remove in first -> using map() OR shift()
+// 2.1 remove in first -> using map() for immutable OR shift() for mutable
 let removeInFirst = [0, 1, 2, 3, 4];
 for (let i = 0; i < removeInFirst.length; i++) {
   if (i === removeInFirst.length) break;

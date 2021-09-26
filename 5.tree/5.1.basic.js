@@ -145,6 +145,45 @@ class BinarySearchTree {
 
     searchKey(this.root, key);
   }
+
+  remove(key) {
+    const minNode = (node) => {
+      let current = node;
+      while (current !== null && current.left !== null) {
+        current = current.left;
+      }
+      return current;
+    };
+
+    const removeNode = (node, key) => {
+      if (node === null) {
+        return null;
+      }
+
+      if (node.key < key) {
+        node.left = removeNode(node.left, key);
+        return node;
+      } else if (node.key > key) {
+        node.right = removeNode(node.right, key);
+        return node;
+      } else {
+        // case 1 without leaf
+        if (node.left === null && node.right === null) {
+          node = null;
+        }
+        // case 2 has leaf
+        if (node.left === null) {
+          node = node.right;
+          return node;
+        } else if (node.right === null) {
+          node = node.left;
+          return node;
+        }
+        // case 3 has subtree -> need to calculate min value for removed node
+        const minNode = minNode(node);
+      }
+    };
+  }
 }
 
 const myTree = new BinarySearchTree();
