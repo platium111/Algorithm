@@ -23,7 +23,7 @@ class LinkedList {
     } else {
       current = this.head;
       // ! need to iterate by this way
-      while (current.next != null) {
+      while (current.next) {
         current = current.next;
       }
       current.next = node;
@@ -41,7 +41,7 @@ class LinkedList {
       current = this.head;
 
       let index = 0;
-      while (current.next != null) {
+      while (current.next) {
         if (position === index) {
           let temporaryNextNode = current.next;
           current.next = node;
@@ -61,7 +61,7 @@ class LinkedList {
     let current = this.head;
 
     let index = 0;
-    while (current.next !== null) {
+    while (current.next) {
       if (index === position) {
         return current;
       }
@@ -79,13 +79,31 @@ class LinkedList {
 
     let current = this.head;
     let index = 0;
-    while (current.next !== null) {
+    while (current.next) {
       if (index === position - 1) {
         current.next = current.next.next;
         return;
       }
       current = current.next;
       index++;
+    }
+  }
+
+  remove(element) {
+    if (!this.head) {
+      return null;
+    }
+    let current = this.head;
+
+    if (current.element === element) {
+      this.head = current.next;
+    }
+    while (current.next) {
+      if (current.next?.element === element) {
+        current.next = current.next.next;
+        break;
+      }
+      current = current.next;
     }
   }
 }
@@ -106,6 +124,8 @@ testLinkedList.push(2);
 testLinkedList.push(3);
 testLinkedList.insert(4, 1);
 
-console.log("getElementAt 2,", testLinkedList.getElementAt(4));
+console.log("getElementAt 2,", testLinkedList.getElementAt(2));
+console.log("print out initialization ", JSON.stringify(testLinkedList));
 // testLinkedList.removeAt(1);
+testLinkedList.remove(2);
 console.log(JSON.stringify(testLinkedList)); // {"count":3,"head":{"element":1,"next":{"element":2,"next":{"element":3}}}}
